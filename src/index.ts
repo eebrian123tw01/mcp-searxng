@@ -21,7 +21,7 @@ import { createHttpServer } from "./http-server.js";
 import { validateEnvironment as validateEnv } from "./error-handler.js";
 
 // Use a static version string that will be updated by the version script
-const packageVersion = "0.8.0";
+const packageVersion = "0.9.1";
 
 // Export the version for use in other modules
 export { packageVersion };
@@ -274,10 +274,10 @@ async function main() {
     // Default STDIO transport
     // Show helpful message when running in terminal
     if (process.stdin.isTTY) {
-      console.log(`🔍 MCP SearXNG Server v${packageVersion} - Ready`);
-      console.log("✅ Configuration valid");
-      console.log(`🌐 SearXNG URL: ${process.env.SEARXNG_URL}`);
-      console.log("📡 Waiting for MCP client connection via STDIO...\n");
+      console.error(`🔍 MCP SearXNG Server v${packageVersion} - Ready`);
+      console.error("✅ Configuration valid");
+      console.error(`🌐 SearXNG URL: ${process.env.SEARXNG_URL}`);
+      console.error("📡 Waiting for MCP client connection via STDIO...\n");
     }
     
     const transport = new StdioServerTransport();

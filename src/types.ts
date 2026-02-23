@@ -14,7 +14,7 @@ export function isSearXNGWebSearchArgs(args: unknown): args is {
   pageno?: number;
   time_range?: string;
   language?: string;
-  safesearch?: string;
+  safesearch?: number;
 } {
   return (
     typeof args === "object" &&
@@ -29,6 +29,10 @@ export const WEB_SEARCH_TOOL: Tool = {
   description:
     "Performs a web search using the SearXNG API, ideal for general queries, news, articles, and online content. " +
     "Use this for broad information gathering, recent events, or when you need diverse web sources.",
+  annotations: {
+    readOnlyHint: true,
+    openWorldHint: true,
+  },
   inputSchema: {
     type: "object",
     properties: {
@@ -54,11 +58,11 @@ export const WEB_SEARCH_TOOL: Tool = {
         default: "all",
       },
       safesearch: {
-        type: "string",
+        type: "number",
         description:
           "Safe search filter level (0: None, 1: Moderate, 2: Strict)",
-        enum: ["0", "1", "2"],
-        default: "0",
+        enum: [0, 1, 2],
+        default: 0,
       },
     },
     required: ["query"],
@@ -70,6 +74,10 @@ export const READ_URL_TOOL: Tool = {
   description:
     "Read the content from an URL. " +
     "Use this for further information retrieving to understand the content of each URL.",
+  annotations: {
+    readOnlyHint: true,
+    openWorldHint: true,
+  },
   inputSchema: {
     type: "object",
     properties: {
